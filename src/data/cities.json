@@ -1,0 +1,24 @@
+{
+  "cities": [
+    { "id": "delhi", "name": "Delhi", "state": "Delhi" },
+    { "id": "mumbai", "name": "Mumbai", "state": "Maharashtra" },
+    { "id": "bangalore", "name": "Bangalore", "state": "Karnataka" },
+    { "id": "hyderabad", "name": "Hyderabad", "state": "Telangana" },
+    { "id": "chennai", "name": "Chennai", "state": "Tamil Nadu" },
+    { "id": "kolkata", "name": "Kolkata", "state": "West Bengal" },
+    { "id": "jaipur", "name": "Jaipur", "state": "Rajasthan" },
+    { "id": "udaipur", "name": "Udaipur", "state": "Rajasthan" },
+    { "id": "varanasi", "name": "Varanasi", "state": "Uttar Pradesh" },
+    { "id": "lucknow", "name": "Lucknow", "state": "Uttar Pradesh" },
+    { "id": "amritsar", "name": "Amritsar", "state": "Punjab" },
+    { "id": "ahmedabad", "name": "Ahmedabad", "state": "Gujarat" },
+    { "id": "pune", "name": "Pune", "state": "Maharashtra" },
+    { "id": "kochi", "name": "Kochi", "state": "Kerala" },
+    { "id": "goa", "name": "Goa", "state": "Goa" },
+    { "id": "mysore", "name": "Mysore", "state": "Karnataka" },
+    { "id": "bhubaneswar", "name": "Bhubaneswar", "state": "Odisha" },
+    { "id": "guwahati", "name": "Guwahati", "state": "Assam" },
+    { "id": "shimla", "name": "Shimla", "state": "Himachal Pradesh" },
+    { "id": "rishikesh", "name": "Rishikesh", "state": "Uttarakhand" }
+  ]
+}

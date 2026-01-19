@@ -1,0 +1,14 @@
+{
+  "tags": [
+    { "id": "jathara", "name": "Jathara", "icon": "🎭", "color": "burgundy" },
+    { "id": "food-party", "name": "Food Party", "icon": "🍛", "color": "saffron" },
+    { "id": "tribal", "name": "Tribal Events", "icon": "🪘", "color": "teal" },
+    { "id": "music", "name": "Music & Dance", "icon": "💃", "color": "gold" },
+    { "id": "religious", "name": "Religious", "icon": "🕉️", "color": "burgundy" },
+    { "id": "festival", "name": "Festival", "icon": "🎉", "color": "saffron" },
+    { "id": "wedding", "name": "Wedding Ceremony", "icon": "💒", "color": "gold" },
+    { "id": "art", "name": "Art & Craft", "icon": "🎨", "color": "teal" },
+    { "id": "heritage", "name": "Heritage Walk", "icon": "🏛️", "color": "burgundy" },
+    { "id": "cooking", "name": "Cooking Class", "icon": "👨‍🍳", "color": "saffron" }
+  ]
+}
