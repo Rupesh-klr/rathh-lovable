@@ -136,30 +136,33 @@ const HeroCarousel = () => {
               <label className="block text-sm font-medium text-muted-foreground mb-2">
                 Start Date
               </label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className={cn(
-                      "w-full h-12 justify-start text-left font-normal",
-                      !startDate && "text-muted-foreground"
-                    )}
-                  >
-                    <Calendar className="mr-2 h-5 w-5" />
-                    {startDate ? format(startDate, "PPP") : "Pick a date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <CalendarComponent
-                    mode="single"
-                    selected={startDate}
-                    onSelect={setStartDate}
-                    initialFocus
-                    className="pointer-events-auto"
-                    disabled={(date) => date < new Date()}
-                  />
-                </PopoverContent>
-              </Popover>
+               <Popover>
+                 <PopoverTrigger asChild>
+                   <Button
+                     variant="outline"
+                     className={cn(
+                       "w-full h-12 justify-start text-left font-normal",
+                       !startDate && "text-muted-foreground"
+                     )}
+                   >
+                     <Calendar className="mr-2 h-5 w-5" />
+                     {startDate ? format(startDate, "PPP") : "Pick a date"}
+                   </Button>
+                 </PopoverTrigger>
+                 <PopoverContent className="w-auto p-0" align="start">
+                   <CalendarComponent
+                     mode="single"
+                     selected={startDate}
+                     onSelect={(date) => {
+                       setStartDate(date);
+                       setEndDate(undefined);
+                     }}
+                     initialFocus
+                     className="pointer-events-auto"
+                     disabled={(date) => date < new Date()}
+                   />
+                 </PopoverContent>
+               </Popover>
             </div>
 
             {/* End Date */}

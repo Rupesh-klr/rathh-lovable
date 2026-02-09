@@ -2,6 +2,7 @@ import { useState, useRef, useMemo } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
 import HeroCarousel from "@/components/HeroCarousel";
+import HomeMainContent from "@/components/HomeMainContent";
 import EventFilters from "@/components/EventFilters";
 import EventCard from "@/components/EventCard";
 import BookingModal from "@/components/BookingModal";
@@ -64,6 +65,11 @@ const Index = () => {
       
       {/* Hero Carousel with Search */}
       <HeroCarousel />
+
+      {/* Main Content Section */}
+      <div className="mt-24">
+        <HomeMainContent />
+      </div>
 
       {/* Events Section */}
       <section 

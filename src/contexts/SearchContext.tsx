@@ -4,6 +4,7 @@ interface SearchParams {
   destination: string;
   startDate: Date | undefined;
   endDate: Date | undefined;
+  category?: string;
 }
 
 interface SearchContextType {
@@ -18,6 +19,7 @@ export const SearchProvider = ({ children }: { children: ReactNode }) => {
     destination: "",
     startDate: undefined,
     endDate: undefined,
+    category: undefined,
   });
 
   return (
