@@ -1,0 +1,40 @@
+{
+  "socialLinks": [
+    { "id": "fb", "icon": "Facebook", "url": "https://facebook.com", "label": "Facebook" },
+    { "id": "tw", "icon": "Twitter", "url": "https://twitter.com", "label": "Twitter" },
+    { "id": "in", "icon": "Instagram", "url": "https://instagram.com", "label": "Instagram" },
+    { "id": "li", "icon": "LinkedIn", "url": "https://linkedin.com", "label": "LinkedIn" }
+  ],
+  "navigationColumns": [
+    {
+      "id": "col-company",
+      "title": "Company",
+      "links": [
+        { "label": "About Us", "url": "/about", "openInNewTab": false },
+        { "label": "Careers", "url": "/careers", "openInNewTab": false },
+        { "label": "Press", "url": "/press", "openInNewTab": false },
+        { "label": "Blog", "url": "/blog", "openInNewTab": false }
+      ]
+    },
+    {
+      "id": "col-explore",
+      "title": "Explore",
+      "links": [
+        { "label": "Destinations", "url": "/destinations", "openInNewTab": false },
+        { "label": "Tours", "url": "/tours", "openInNewTab": false },
+        { "label": "Activities", "url": "/activities", "openInNewTab": false },
+        { "label": "Travel Guides", "url": "/guides", "openInNewTab": false }
+      ]
+    },
+    {
+      "id": "col-support",
+      "title": "Support",
+      "links": [
+        { "label": "FAQ", "url": "/faq", "openInNewTab": false },
+        { "label": "Contact Us", "url": "/contact", "openInNewTab": false },
+        { "label": "Privacy Policy", "url": "/privacy", "openInNewTab": false },
+        { "label": "Terms of Service", "url": "/terms", "openInNewTab": false }
+      ]
+    }
+  ]
+}
