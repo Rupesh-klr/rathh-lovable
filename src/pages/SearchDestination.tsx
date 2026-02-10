@@ -12,7 +12,7 @@ import {
   Tag,
   DollarSign,
   Clock,
-  Eye,
+  ArrowUpDown,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -25,65 +25,88 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+import TourCard, { type TourData } from "@/components/TourCard";
 
 // --- MOCK BACKEND ---
 const ENABLE_BACKEND_API = false;
 
-interface Tour {
-  id: number;
-  name: string;
-  location: string;
-  price: number;
-  description: string;
-  pic: string;
-  availableDates: string[];
-  category?: string;
-}
-
-const MOCK_TOURS: Tour[] = [
+const MOCK_TOURS: TourData[] = [
   {
-    id: 1,
+    id: "trip_101",
     name: "Hidden Gems of Hyderabad",
     location: "Hyderabad, Telangana",
     price: 1200,
+    offer: "10% Off",
+    popularityScore: 95,
+    bookingCount: 120,
+    maxGuests: 15,
+    startDate: "2026-03-01",
+    endDate: "2026-03-05",
+    duration: 5,
     description: "Explore the ancient streets and hidden culinary treasures.",
     pic: "https://images.unsplash.com/photo-1626014903700-1c5c58b44463?w=600&q=80",
-    availableDates: ["2026-03-01", "2026-03-15"],
     category: "Cultural Immersion",
   },
   {
-    id: 2,
+    id: "trip_102",
     name: "Warangal Heritage Walk",
     location: "Warangal, Telangana",
     price: 800,
+    offer: null,
+    popularityScore: 80,
+    bookingCount: 45,
+    maxGuests: 20,
+    startDate: "2026-03-10",
+    endDate: "2026-03-12",
+    duration: 3,
     description: "A journey through the Kakatiya dynasty's architectural marvels.",
     pic: "https://images.unsplash.com/photo-1634225252824-2c06180c5417?w=600&q=80",
-    availableDates: ["2026-03-10"],
     category: "Cultural Immersion",
   },
   {
-    id: 3,
+    id: "trip_103",
     name: "Kerala Backwaters Retreat",
     location: "Alleppey, Kerala",
     price: 3500,
+    offer: "Early Bird Deal",
+    popularityScore: 98,
+    bookingCount: 300,
+    maxGuests: 4,
+    startDate: "2026-04-05",
+    endDate: "2026-04-12",
+    duration: 8,
     description: "Relax on a houseboat cruising through serene waters.",
     pic: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600&q=80",
-    availableDates: ["2026-04-05", "2026-04-20"],
     category: "Slow & Scenic",
   },
   {
-    id: 4,
+    id: "trip_104",
     name: "Goa Beach & Party",
     location: "North Goa",
     price: 2800,
+    offer: null,
+    popularityScore: 92,
+    bookingCount: 500,
+    maxGuests: 50,
+    startDate: "2026-02-28",
+    endDate: "2026-03-04",
+    duration: 5,
     description: "Experience the vibrant nightlife and sun-kissed beaches.",
     pic: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=600&q=80",
-    availableDates: ["2026-02-28"],
     category: "Adventure Trails",
   },
 ];
+
+type SortOption = "popularity" | "price_asc" | "duration" | "start_date" | "end_date";
 
 interface FilterPayload {
   date: { start: Date | undefined; end: Date | undefined };
@@ -97,12 +120,11 @@ const performSearch = async (
   _url: string,
   _method: string,
   body: FilterPayload
-): Promise<Tour[]> => {
+): Promise<TourData[]> => {
   if (!ENABLE_BACKEND_API) {
     console.log("🔍 Search Payload:", body);
     return new Promise((resolve) => setTimeout(() => resolve(MOCK_TOURS), 500));
   }
-  // Stub for real API
   const res = await fetch(_url, {
     method: _method,
     headers: { "Content-Type": "application/json" },
@@ -254,9 +276,28 @@ const SearchDestination = () => {
   const [priceRange, setPriceRange] = useState<[number, number]>([PRICE_MIN, PRICE_MAX]);
   const [minPriceInput, setMinPriceInput] = useState(String(PRICE_MIN));
   const [maxPriceInput, setMaxPriceInput] = useState(String(PRICE_MAX));
-  const [tours, setTours] = useState<Tour[]>(MOCK_TOURS);
+  const [tours, setTours] = useState<TourData[]>(MOCK_TOURS);
   const [loading, setLoading] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [sortBy, setSortBy] = useState<SortOption>("popularity");
+
+  const sortedTours = useMemo(() => {
+    const sorted = [...tours];
+    switch (sortBy) {
+      case "popularity":
+        return sorted.sort((a, b) => b.popularityScore - a.popularityScore);
+      case "price_asc":
+        return sorted.sort((a, b) => a.price - b.price);
+      case "duration":
+        return sorted.sort((a, b) => a.duration - b.duration);
+      case "start_date":
+        return sorted.sort((a, b) => a.startDate.localeCompare(b.startDate));
+      case "end_date":
+        return sorted.sort((a, b) => a.endDate.localeCompare(b.endDate));
+      default:
+        return sorted;
+    }
+  }, [tours, sortBy]);
 
   // Auto-calculate duration from dates
   useEffect(() => {
@@ -587,6 +628,28 @@ const SearchDestination = () => {
 
             {/* Results Grid */}
             <div className="flex-1">
+              {/* Sorting Toolbar */}
+              <div className="flex items-center justify-between mb-6">
+                <p className="text-sm text-muted-foreground">
+                  {sortedTours.length} results
+                </p>
+                <div className="flex items-center gap-2">
+                  <ArrowUpDown className="w-4 h-4 text-muted-foreground" />
+                  <Select value={sortBy} onValueChange={(v) => setSortBy(v as SortOption)}>
+                    <SelectTrigger className="w-48 h-9 text-sm">
+                      <SelectValue placeholder="Sort By" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="popularity">Popularity</SelectItem>
+                      <SelectItem value="price_asc">Price: Low to High</SelectItem>
+                      <SelectItem value="duration">Duration (Shortest)</SelectItem>
+                      <SelectItem value="start_date">Event Start Date</SelectItem>
+                      <SelectItem value="end_date">Event End Date</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
               {loading ? (
                 <div className="grid sm:grid-cols-2 gap-6">
                   {[1, 2, 3, 4].map((i) => (
@@ -600,47 +663,10 @@ const SearchDestination = () => {
                     </Card>
                   ))}
                 </div>
-              ) : tours.length > 0 ? (
+              ) : sortedTours.length > 0 ? (
                 <div className="grid sm:grid-cols-2 gap-6">
-                  {tours.map((tour) => (
-                    <Card
-                      key={tour.id}
-                      className="overflow-hidden group hover:shadow-lg transition-shadow"
-                    >
-                      <div className="relative h-48 overflow-hidden">
-                        <img
-                          src={tour.pic}
-                          alt={tour.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        {tour.category && (
-                          <Badge className="absolute top-3 left-3 bg-primary/90 backdrop-blur-sm">
-                            {tour.category}
-                          </Badge>
-                        )}
-                      </div>
-                      <CardContent className="p-5">
-                        <h3 className="font-serif text-lg font-semibold text-foreground mb-1">
-                          {tour.name}
-                        </h3>
-                        <p className="text-sm text-muted-foreground flex items-center gap-1 mb-2">
-                          <MapPin className="w-3.5 h-3.5" />
-                          {tour.location}
-                        </p>
-                        <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-                          {tour.description}
-                        </p>
-                        <div className="flex items-center justify-between">
-                          <span className="text-xl font-bold text-foreground">
-                            ${tour.price.toLocaleString()}
-                          </span>
-                          <Button size="sm" className="gap-1">
-                            <Eye className="w-4 h-4" />
-                            View Details
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
+                  {sortedTours.map((tour) => (
+                    <TourCard key={tour.id} tour={tour} />
                   ))}
                 </div>
               ) : (
