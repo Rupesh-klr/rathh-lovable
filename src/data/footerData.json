@@ -12,7 +12,6 @@
       "links": [
         { "label": "About Us", "url": "/about", "openInNewTab": false },
         { "label": "Careers", "url": "/careers", "openInNewTab": false },
-        { "label": "Press", "url": "/press", "openInNewTab": false },
         { "label": "Blog", "url": "/blog", "openInNewTab": false }
       ]
     },
@@ -30,10 +29,10 @@
       "id": "col-support",
       "title": "Support",
       "links": [
-        { "label": "FAQ", "url": "/faq", "openInNewTab": false },
-        { "label": "Contact Us", "url": "/contact", "openInNewTab": false },
-        { "label": "Privacy Policy", "url": "/privacy", "openInNewTab": false },
-        { "label": "Terms of Service", "url": "/terms", "openInNewTab": false }
+        { "label": "FAQ", "url": "/support#faq", "openInNewTab": false },
+        { "label": "Contact Us", "url": "/support#contact", "openInNewTab": false },
+        { "label": "Privacy Policy", "url": "/support#privacy", "openInNewTab": false },
+        { "label": "Terms of Service", "url": "/support#terms", "openInNewTab": false }
       ]
     }
   ]
