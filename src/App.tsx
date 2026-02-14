@@ -17,6 +17,12 @@ import CareersPage from "./pages/CareersPage";
 import BlogListPage from "./pages/BlogListPage";
 import BlogDetailPage from "./pages/BlogDetailPage";
 import NotFound from "./pages/NotFound";
+import DestinationsPage from "./pages/DestinationsPage";
+import WaysToTravelPage from "./pages/WaysToTravelPage";
+import DealsPage from "./pages/DealsPage";
+import ToursPage from "./pages/ToursPage";
+import ActivitiesPage from "./pages/ActivitiesPage";
+import GuidesPage from "./pages/GuidesPage";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +51,12 @@ const App = () => (
               <Route path="/press" element={<AboutPage />} />
               <Route path="/blog" element={<BlogListPage />} />
               <Route path="/blog/:id" element={<BlogDetailPage />} />
+              <Route path="/destinations" element={<DestinationsPage />} />
+              <Route path="/ways-to-travel" element={<WaysToTravelPage />} />
+              <Route path="/deals" element={<DealsPage />} />
+              <Route path="/tours" element={<ToursPage />} />
+              <Route path="/activities" element={<ActivitiesPage />} />
+              <Route path="/guides" element={<GuidesPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
